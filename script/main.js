@@ -6,31 +6,38 @@ const app = new PIXI.Application({
 
 document.body.appendChild(app.view);
 
-PIXI.Loader.shared
-    .add("images/cat.png")
-    .load(setup);
+let Graphics = PIXI.Graphics;
 
-function setup() {
-    let cat = new PIXI.Sprite(PIXI.Loader.shared.resources["images/cat.png"].texture);
+let rectangle = new Graphics();
+rectangle.lineStyle(4, 0xff3300, 1);
+rectangle.beginFill(0x66ccff);
+rectangle.drawRect(0,0,64,64);
+rectangle.endFill();
+rectangle.x = 170;
+rectangle.y = 170;
+app.stage.addChild(rectangle);
 
-    app.stage.addChild(cat);
+let ellipse = new Graphics();
+ellipse.beginFill(0xffff00);
+ellipse.drawEllipse(0,0,50,20);
+ellipse.endFill();
+ellipse.x = 180;
+ellipse.y = 130;
+app.stage.addChild(ellipse);
 
-    /*let Sprite = PIXI.Sprite;
-    let cattwo = new Sprite(PIXI.Loader.shared.resources["images/cat.png"].texture);
-    cattwo.x = 50;
-    cattwo.y = 50;
+let roundBox = new Graphics();
+roundBox.lineStyle(4,0x99ccff,1);
+ellipse.beginFill(0xff9933);
+roundBox.drawRoundedRect(0,0,84,36,10);
+roundBox.endFill();
+roundBox.x = 48;
+roundBox.y = 190;
+app.stage.addChild(roundBox);
 
-    app.stage.addChild(cattwo);*/
-
-    cat.x = 100;
-    cat.y = 100;
-
-    // cat.width = 50;
-    // cat.height = 100;
-    cat.scale.set(1);
-    cat.anchor.set(0.5); // точка вращения
-
-    app.ticker.add((delta) => {
-        cat.rotation -= 0.01 *delta;
-    });
-}
+let line = new Graphics();
+line.lineStyle(4,0x99ccff,1);
+line.moveTo(0,0);
+line.lineTo(80,50);
+line.x = 32;
+line.y = 32;
+app.stage.addChild(line);
