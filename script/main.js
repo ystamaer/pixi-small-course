@@ -1,25 +1,36 @@
 const app = new PIXI.Application({
-    width: 640,
-    height: 640,
-    background: 0x1099bb
+    width: 256,
+    height: 256,
+    backgroundColor: 0x1099bb,
 });
 
 document.body.appendChild(app.view);
 
-const  container = new PIXI.Container();
-app.stage.addChild(container);
+PIXI.Loader.shared
+    .add("images/cat.png")
+    .load(setup);
 
-const texture = new PIXI.Texture.from("images/atlas.png");
+function setup() {
+    let cat = new PIXI.Sprite(PIXI.Loader.shared.resources["images/cat.png"].texture);
 
-const smile = new PIXI.Sprite(texture);
-container.addChild(smile);
+    app.stage.addChild(cat);
 
-container.x = app.screen.width / 2;
-container.y = app.screen.height / 2;
+    /*let Sprite = PIXI.Sprite;
+    let cattwo = new Sprite(PIXI.Loader.shared.resources["images/cat.png"].texture);
+    cattwo.x = 50;
+    cattwo.y = 50;
 
-container.pivot.x = container.width / 2;
-container.pivot.y = container.height / 2;
+    app.stage.addChild(cattwo);*/
 
-app.ticker.add((delta) => {
-    container.rotation -= 0.01 * delta;
-});
+    cat.x = 100;
+    cat.y = 100;
+
+    // cat.width = 50;
+    // cat.height = 100;
+    cat.scale.set(1);
+    cat.anchor.set(0.5); // точка вращения
+
+    app.ticker.add((delta) => {
+        cat.rotation -= 0.01 *delta;
+    });
+}
