@@ -6,38 +6,22 @@ const app = new PIXI.Application({
 
 document.body.appendChild(app.view);
 
-let Graphics = PIXI.Graphics;
+let style = new PIXI.TextStyle({
+    fontFamily: "Arial",
+    fontSize: 36,
+    fill: "white",
+});
 
-let rectangle = new Graphics();
-rectangle.lineStyle(4, 0xff3300, 1);
-rectangle.beginFill(0x66ccff);
-rectangle.drawRect(0,0,64,64);
-rectangle.endFill();
-rectangle.x = 170;
-rectangle.y = 170;
-app.stage.addChild(rectangle);
+let message = new PIXI.Text("Hello!", style)
 
-let ellipse = new Graphics();
-ellipse.beginFill(0xffff00);
-ellipse.drawEllipse(0,0,50,20);
-ellipse.endFill();
-ellipse.x = 180;
-ellipse.y = 130;
-app.stage.addChild(ellipse);
+app.stage.addChild(message);
 
-let roundBox = new Graphics();
-roundBox.lineStyle(4,0x99ccff,1);
-ellipse.beginFill(0xff9933);
-roundBox.drawRoundedRect(0,0,84,36,10);
-roundBox.endFill();
-roundBox.x = 48;
-roundBox.y = 190;
-app.stage.addChild(roundBox);
+let value = 0;
 
-let line = new Graphics();
-line.lineStyle(4,0x99ccff,1);
-line.moveTo(0,0);
-line.lineTo(80,50);
-line.x = 32;
-line.y = 32;
-app.stage.addChild(line);
+message.x = 100;
+message.y = 100;
+
+app.ticker.add((delta) => {
+    value++;
+    message.text = value;
+});
